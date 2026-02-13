@@ -22,3 +22,9 @@
     citecolor=green,        % цвет ссылок на литературу
     pdfborder={0 0 0}       % убрать рамки вокруг ссылок
 }
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\newcommand{\subsubsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
