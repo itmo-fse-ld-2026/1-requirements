@@ -1,3 +1,9 @@
+# =============================================================================
+# Custom XeLaTeX Environment for Lab SRS Documentation
+# Base: ghcr.io/mrdvd/xetex-base (Ubuntu-based)
+# Purpose: Compiling Russian-language RUP/SRS documents with XeLaTeX
+# =============================================================================
+
 FROM ghcr.io/mrdvd/xetex-base:latest
 
 RUN \

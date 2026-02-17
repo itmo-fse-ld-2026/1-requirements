@@ -3,6 +3,7 @@ name: Test PDF
 on:
   push:
     branches: [dev]
+  workflow_dispatch:
 
 jobs:
   docker_changes:
