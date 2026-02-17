@@ -54,7 +54,7 @@ jobs:
     if: always() && (needs.build_docker.result == 'success' || needs.build_docker.result == 'skipped')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/1-xetex-compiler:latest
+      image: ghcr.io/${{ steps.get_owner.outputs.owner }}/1-xetex-compiler:latest
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
