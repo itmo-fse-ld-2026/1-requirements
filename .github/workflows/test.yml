@@ -28,7 +28,7 @@ jobs:
           IMAGE_PATH="ghcr.io/${OWNER,,}/1-xetex-compiler"
           PR_TAG="pr-${{ github.event.pull_request.number }}"
 
-          if [ "${{ steps.filter.outputs.docker }}" == "true" ] || ! docker manifest inspect ${IMAGE_PATH}:${PR_TAG} > /dev/null 2>&1; then
+          if [ "${{ steps.filter.outputs.docker }}" == "true" ] || docker manifest inspect ${IMAGE_PATH}:${PR_TAG} > /dev/null 2>&1; then
             echo "full_image=${IMAGE_PATH}:${PR_TAG}" >> $GITHUB_OUTPUT
           else
             echo "full_image=${IMAGE_PATH}:dev" >> $GITHUB_OUTPUT
