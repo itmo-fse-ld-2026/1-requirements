@@ -74,7 +74,7 @@ jobs:
         run: |
           mkdir public
           cp report/main.pdf public/report.pdf
-          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=report.pdf"></head><body><script>window.onload=function(){const a=document.createElement("a");a.href="report.pdf";a.download="report.pdf";document.body.appendChild(a);a.click();setTimeout(()=>{window.close()},2000)}</script></body></html>' > public/index.html
+          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=report.pdf"><title>Redirecting...</title></head><body><p>Redirecting to <a href="report.pdf">report.pdf</a>...</p></body></html>' > public/index.html
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
