@@ -70,16 +70,23 @@ jobs:
           make clean
           make pdf
 
-      - name: Upload PDF Artifact
-        uses: actions/upload-artifact@v6
+      - name: Prepare Pages Upload
+        run: |
+          mkdir public
+          cp report/main.pdf public/report.pdf
+          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=report.pdf"></head><body><script>window.onload=function(){const a=document.createElement("a");a.href="report.pdf";a.download="report.pdf";document.body.appendChild(a);a.click();setTimeout(()=>{window.close()},2000)}</script></body></html>' > public/index.html
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: main
-          path: "report/"
-          retention-days: 30
-  
+          path: public/
+
   deploy:
     needs: build_pdf
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
