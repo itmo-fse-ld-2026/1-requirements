@@ -1,39 +1,81 @@
-name: Publish PDF
+name: Build and Publish PDF
 
 on:
   push:
     branches: [main]
 
 jobs:
-  build:
+  docker_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      docker: ${{ steps.filter.outputs.docker }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docker:
+              - 'Dockerfile'
+
+  build_docker:
+    needs: docker_changes
+    if: needs.docker_changes.outputs.docker == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set lowercase owner name
+        id: get_owner
+        run: echo "owner=${OWNER,,}" >> $GITHUB_OUTPUT
+        env:
+          OWNER: '${{ github.repository_owner }}'
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ steps.get_owner.outputs.owner }}/1-xetex-compiler:latest
+
+  build_pdf:
+    needs: [docker_changes, build_docker]
+    if: always() && (needs.build_docker.result == 'success' || needs.build_docker.result == 'skipped')
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/1-xetex-compiler:latest
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-      volumes:
-        - .:/data
     steps:
-      - name: Check out the repository to the runner
+      - name: Check out the repository
         uses: actions/checkout@v6
 
-      - name: Clean artifacts, if any
-        run: make clean
-
       - name: Compile PDF
-        run: make pdf
+        run: |
+          make clean
+          make pdf
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v6
         with:
           name: main
           path: "report/"
-          if-no-files-found: error
           retention-days: 30
   
   deploy:
-    needs: build
+    needs: build_pdf
     runs-on: ubuntu-latest
     environment:
       name: github-pages
