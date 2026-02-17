@@ -1,4 +1,4 @@
-name: Update Docker image
+name: Update Docker Image
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       - name: Set full image name
         id: get_image
         run: |
-          echo "full_image=ghcr.io/${OWNER,,}/1-xetex-compiler:latest" >> $GITHUB_OUTPUT
+          echo "full_image=ghcr.io/${OWNER,,}/1-xetex-compiler:dev" >> $GITHUB_OUTPUT
         env:
           OWNER: '${{ github.repository_owner }}'
 
