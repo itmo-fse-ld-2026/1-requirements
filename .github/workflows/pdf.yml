@@ -1,0 +1,44 @@
+name: Publish PDF
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/1-xetex-compiler:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      volumes:
+        - .:/data
+    steps:
+      - name: Check out the repository to the runner
+        uses: actions/checkout@v6
+
+      - name: Clean artifacts, if any
+        run: make clean
+
+      - name: Compile PDF
+        run: make pdf
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: main
+          path: "report/"
+          if-no-files-found: error
+          retention-days: 30
+  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
