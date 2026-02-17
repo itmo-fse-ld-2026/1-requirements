@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
-      owner: ${{ steps.get_owner.outputs.owner }}
+      full_image: ${{ steps.get_tag.outputs.full_image }}
 
     steps:
       - uses: actions/checkout@v6
@@ -21,9 +21,10 @@ jobs:
             docker:
               - 'Dockerfile'
 
-      - name: Set lowercase owner name
+      - name: Set full image name
         id: get_owner
-        run: echo "owner=${OWNER,,}" >> $GITHUB_OUTPUT
+        run: |
+          echo "full_image=ghcr.io/${OWNER,,}/1-xetex-compiler:latest" >> $GITHUB_OUTPUT
         env:
           OWNER: '${{ github.repository_owner }}'
 
@@ -50,14 +51,14 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ needs.docker_changes.outputs.owner }}/1-xetex-compiler:latest
+          tags: ${{ needs.docker_changes.outputs.full_image }}
 
   build_pdf:
     needs: [docker_changes, build_docker]
     if: always() && (needs.build_docker.result == 'success' || needs.build_docker.result == 'skipped')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ needs.docker_changes.outputs.owner }}/1-xetex-compiler:latest
+      image: ${{ needs.docker_changes.outputs.full_image }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}

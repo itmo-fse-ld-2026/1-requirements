@@ -1,18 +1,15 @@
 name: Test PDF
 
 on:
-  push:
-    branches: [dev]
   pull_request:
     branches: [dev]
-  workflow_dispatch:
 
 jobs:
   docker_changes:
     runs-on: ubuntu-latest
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
-      owner: ${{ steps.get_owner.outputs.owner }}
+      full_image: ${{ steps.get_tag.outputs.full_image }}
 
     steps:
       - uses: actions/checkout@v6
@@ -29,6 +26,18 @@ jobs:
         run: echo "owner=${OWNER,,}" >> $GITHUB_OUTPUT
         env:
           OWNER: '${{ github.repository_owner }}'
+      
+      - name: Determine Docker Tag
+        id: get_tag
+        run: |
+          IMAGE_PATH="ghcr.io/${{ steps.get_owner.outputs.owner }}/1-xetex-compiler"
+          PR_TAG="pr-${{ github.event.pull_request.number }}"
+
+          if [ "${{ steps.filter.outputs.docker }}" == "true" ] || ! docker manifest inspect ${IMAGE_PATH}:${PR_TAG} > /dev/null 2>&1; then
+            echo "full_image=${IMAGE_PATH}:${PR_TAG}" >> $GITHUB_OUTPUT
+          else
+            echo "full_image=${IMAGE_PATH}:dev" >> $GITHUB_OUTPUT
+          fi
 
   build_docker:
     needs: docker_changes
@@ -53,14 +62,14 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ needs.docker_changes.outputs.owner }}/1-xetex-compiler:dev
+          tags: ${{ needs.docker_changes.outputs.full_image }}
 
   build_pdf:
     needs: [docker_changes, build_docker]
     if: always() && (needs.build_docker.result == 'success' || needs.build_docker.result == 'skipped')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ needs.docker_changes.outputs.owner }}/1-xetex-compiler:dev
+      image: ${{ needs.docker_changes.outputs.full_image }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
