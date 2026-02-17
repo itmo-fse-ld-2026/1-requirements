@@ -9,14 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
+      owner: ${{ steps.get_owner.outputs.owner }}
+
     steps:
       - uses: actions/checkout@v6
+
       - uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
             docker:
               - 'Dockerfile'
+
+      - name: Set lowercase owner name
+        id: get_owner
+        run: echo "owner=${OWNER,,}" >> $GITHUB_OUTPUT
+        env:
+          OWNER: '${{ github.repository_owner }}'
 
   build_docker:
     needs: docker_changes
@@ -35,26 +44,20 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Set lowercase owner name
-        id: get_owner
-        run: echo "owner=${OWNER,,}" >> $GITHUB_OUTPUT
-        env:
-          OWNER: '${{ github.repository_owner }}'
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ steps.get_owner.outputs.owner }}/1-xetex-compiler:latest
+          tags: ghcr.io/${{ needs.docker_changes.outputs.owner }}/1-xetex-compiler:latest
 
   build_pdf:
     needs: [docker_changes, build_docker]
     if: always() && (needs.build_docker.result == 'success' || needs.build_docker.result == 'skipped')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ steps.get_owner.outputs.owner }}/1-xetex-compiler:latest
+      image: ghcr.io/${{ needs.docker_changes.outputs.owner }}/1-xetex-compiler:latest
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
