@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
-      full_image: ${{ steps.get_tag.outputs.full_image }}
+      full_image: ${{ steps.get_image.outputs.full_image }}
 
     steps:
       - uses: actions/checkout@v6
@@ -20,17 +20,11 @@ jobs:
           filters: |
             docker:
               - 'Dockerfile'
-
-      - name: Set lowercase owner name
-        id: get_owner
-        run: echo "owner=${OWNER,,}" >> $GITHUB_OUTPUT
-        env:
-          OWNER: '${{ github.repository_owner }}'
       
       - name: Determine Docker Tag
-        id: get_tag
+        id: get_image
         run: |
-          IMAGE_PATH="ghcr.io/${{ steps.get_owner.outputs.owner }}/1-xetex-compiler"
+          IMAGE_PATH="ghcr.io/${{ github.repository_owner }}/1-xetex-compiler"
           PR_TAG="pr-${{ github.event.pull_request.number }}"
 
           if [ "${{ steps.filter.outputs.docker }}" == "true" ] || ! docker manifest inspect ${IMAGE_PATH}:${PR_TAG} > /dev/null 2>&1; then

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
-      full_image: ${{ steps.get_tag.outputs.full_image }}
+      full_image: ${{ steps.get_image.outputs.full_image }}
 
     steps:
       - uses: actions/checkout@v6
@@ -22,7 +22,7 @@ jobs:
               - 'Dockerfile'
 
       - name: Set full image name
-        id: get_owner
+        id: get_image
         run: |
           echo "full_image=ghcr.io/${OWNER,,}/1-xetex-compiler:latest" >> $GITHUB_OUTPUT
         env:
