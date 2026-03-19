@@ -31,9 +31,33 @@
 
 \newenvironment{compactitem}{%
   \setlength{\leftmargini}{8mm}%
+  \vspace{-0.5\topsep}%
   \begin{itemize}%
-    \vspace{-.5\topsep}%
-    \setlength{\itemsep}{0pt}%
+    \setlength{\itemsep}{3pt}%
+    \setlength{\parskip}{0pt}%
 }{%
   \end{itemize}%
+  \vspace{-\topsep}%
+  \ignorespacesafterend%
 }
+
+\usepackage{tabularray}
+  \UseTblrLibrary{varwidth}
+
+\DefTblrTemplate{firsthead,middlehead,lasthead}{default}{
+}
+\DefTblrTemplate{firstfoot}{default}{
+  \UseTblrTemplate{contfoot}{default}
+}
+\DefTblrTemplate{middlefoot}{default}{
+  \UseTblrTemplate{contfoot}{default}
+  \UseTblrTemplate{capcont}{default}
+}
+\DefTblrTemplate{lastfoot}{default}{
+  \UseTblrTemplate{note}{default}
+  \UseTblrTemplate{remark}{default}
+  \addvspace{9pt}
+  \UseTblrTemplate{caption}{default}
+}
+\DeclareTblrTemplate{contfoot-text}{default}{См. далее}
+\SetTblrInner{measure=vbox}

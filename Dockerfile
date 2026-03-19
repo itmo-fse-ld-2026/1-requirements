@@ -22,5 +22,7 @@ RUN \
     titlesec \
     etoolbox \
     tools \
-    float && \
+    float \
+    tabularray \
+    varwidth && \
   apt-get clean
