@@ -28,3 +28,12 @@
 
 \usepackage{tabularx}
 \usepackage{float} % for [H] option in table environment
+
+\newenvironment{compactitem}{%
+  \setlength{\leftmargini}{8mm}%
+  \begin{itemize}%
+    \vspace{-.5\topsep}%
+    \setlength{\itemsep}{0pt}%
+}{%
+  \end{itemize}%
+}
