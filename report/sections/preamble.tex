@@ -60,4 +60,15 @@
   \UseTblrTemplate{caption}{default}
 }
 \DeclareTblrTemplate{contfoot-text}{default}{См. далее}
-\SetTblrInner{measure=vbox}
+
+\NewTblrEnviron{reqtable}
+\SetTblrInner[reqtable]{
+  rowhead = 1, hlines, vlines,
+  row{1} = {font=\bfseries, halign=c},
+  rowsep = 4pt,
+  measure=vbox,
+}
+\SetTblrOuter[reqtable]{
+  postsep = 9pt,
+  long,
+}
