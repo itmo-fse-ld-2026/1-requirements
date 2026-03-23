@@ -1,9 +1,6 @@
 \usepackage{fontspec}
 \usepackage[english, russian]{babel}
-\usepackage{amsmath, amsthm, amssymb}
-\usepackage{enumitem}
 \usepackage{graphicx}
-\usepackage{tabularx, multirow}
 \usepackage[a4paper,
             left=3cm,
             right=3cm,
@@ -22,3 +19,12 @@
     citecolor=green,        % цвет ссылок на литературу
     pdfborder={0 0 0}       % убрать рамки вокруг ссылок
 }
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\newcommand{\subsubsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+
+\usepackage{tabularx}
+\usepackage{float} % for [H] option in table environment
