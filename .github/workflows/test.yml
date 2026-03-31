@@ -8,9 +8,6 @@ on:
 jobs:
   docker_changes:
     runs-on: ubuntu-latest
-    if: |
-      github.event.action != 'edited' || 
-      github.event.changes.base != null
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
       full_image: ${{ steps.get_image.outputs.full_image }}
