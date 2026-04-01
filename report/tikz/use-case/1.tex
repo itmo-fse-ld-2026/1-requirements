@@ -1,26 +1,46 @@
 \begin{tikzpicture}
-  \begin{umlsystem}[x=4, fill=red!10]{The system} 
-  \umlusecase{use case1} 
-  \umlusecase[y=-2]{use case2} 
-  \umlusecase[y=-4]{use case3} 
-  \umlusecase[x=4, y=-2, width=1.5cm]{use case4 on 2 lines} 
-  \umlusecase[x=6, fill=green!20]{use case5} 
-  \umlusecase[x=6, y=-4]{use case6} 
-  \end{umlsystem} 
+  \begin{umlsystem}{Сайт}
+    \umlusecase[name=visit-page]{Посетить страницу}
+    \begin{scope}[
+      start chain=cases going below, 
+      node distance=0.5cm
+    ]
+      \umlusecase[on chain, below=of visit-page, xshift=2cm, name=catch-visit]{Зафиксировать посещение}
+      \umlusecase[on chain, name=show-ad]{Показать рекламу}
+      \umlusecase[on chain, name=write-metrics]{Записать метрики}
+      \umlusecase[on chain, name=share-social]{Поделиться страницей}
+    \end{scope}
+  \end{umlsystem}
+
+  \umlactor[above=2cm of visit-page.west, xshift=2cm]{Пользователь}
   
-  \umlactor{user} 
-  \umlactor[y=-3]{subuser} 
-  \umlactor[x=14, y=-1.5]{admin}
-    
-  \umlinherit{subuser}{user} 
-  \umlassoc{user}{usecase-1} 
-  \umlassoc{subuser}{usecase-2} 
-  \umlassoc{subuser}{usecase-3} 
-  \umlassoc{admin}{usecase-5} 
-  \umlassoc{admin}{usecase-6} 
-  \umlinherit{usecase-2}{usecase-1} 
-  \umlVHextend{usecase-5}{usecase-4} 
-  \umlinclude[name=incl]{usecase-3}{usecase-4} 
+  \matrix (actors) [
+    right=2.2cm of Сайт.east,
+    anchor=center,
+    row sep=0.5cm
+  ] {
+    \umlactor{LiveInternet} \\
+    \umlactor{Рейтинг Mail{.}ru} \\
+    \umlactor{VK Реклама} \\
+    \umlactor{Google Аналитика} \\
+    \umlactor{Яндекс Метрика} \\
+    \umlactor{Социальные сети} \\
+  };
+
+  \umlassoc{(Пользователь.west) -| ++(-1.8,0) |- (visit-page.west)}
+
+  \umlrel{(visit-page.-173) |- (catch-visit.west)}{include}
+  \umlrel{(visit-page.-173) |- (show-ad.west)}{include}
+  \umlrel{(visit-page.-173) |- (write-metrics.west)}{include}
+  \umlrel{(visit-page.-173) |- (share-social.west)}{include}
   
-  \umlnote[x=7, y=-7]{incl-1}{note on include dependency}
+  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (LiveInternet.west)}
+  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (Рейтинг Mail{.}ru.west)}
+
+  \umlassoc{(show-ad.east) -- ++(2,0) |- (VK Реклама.west)}
+
+  \umlassoc{(write-metrics.east) -- ++(2,0) |- (Google Аналитика.west)}
+  \umlassoc{(write-metrics.east) -- ++(2,0) |- (Яндекс Метрика.west)}
+
+  \umlassoc{(share-social.east) -- ++(0.9,0) |- (Социальные сети.west)}
 \end{tikzpicture}
