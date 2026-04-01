@@ -8,7 +8,6 @@
       \umlusecase[on chain, below=of visit-page, xshift=2cm, name=catch-visit]{Зафиксировать посещение}
       \umlusecase[on chain, name=show-ad]{Показать рекламу}
       \umlusecase[on chain, name=write-metrics]{Записать метрики}
-      \umlusecase[on chain, name=share-social]{Поделиться страницей}
     \end{scope}
   \end{umlsystem}
 
@@ -24,7 +23,6 @@
     \umlactor{VK Реклама} \\
     \umlactor{Google Аналитика} \\
     \umlactor{Яндекс Метрика} \\
-    \umlactor{Социальные сети} \\
   };
 
   \umlassoc{(Пользователь.west) -| ++(-1.8,0) |- (visit-page.west)}
@@ -32,7 +30,6 @@
   \umlrel{(visit-page.-173) |- (catch-visit.west)}{include}
   \umlrel{(visit-page.-173) |- (show-ad.west)}{include}
   \umlrel{(visit-page.-173) |- (write-metrics.west)}{include}
-  \umlrel{(share-social.west) -| (visit-page.-170)}{extend}
   
   \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (LiveInternet.west)}
   \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (Рейтинг Mail{.}ru.west)}
@@ -41,6 +38,4 @@
 
   \umlassoc{(write-metrics.east) -- ++(2,0) |- (Google Аналитика.west)}
   \umlassoc{(write-metrics.east) -- ++(2,0) |- (Яндекс Метрика.west)}
-
-  \umlassoc{(share-social.east) -- ++(0.9,0) |- (Социальные сети.west)}
 \end{tikzpicture}

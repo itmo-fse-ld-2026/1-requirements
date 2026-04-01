@@ -1,46 +1,27 @@
-% \begin{tikzpicture}
-%   \begin{umlsystem}{Сайт}
-%     \umlusecase[name=visit-page]{Посетить страницу}
-%     \begin{scope}[
-%       start chain=cases going below, 
-%       node distance=0.5cm
-%     ]
-%       \umlusecase[on chain, below=of visit-page, xshift=2cm, name=catch-visit]{Зафиксировать посещение}
-%       \umlusecase[on chain, name=show-ad]{Показать рекламу}
-%       \umlusecase[on chain, name=write-metrics]{Записать метрики}
-%       \umlusecase[on chain, name=share-social]{Поделиться страницей}
-%     \end{scope}
-%   \end{umlsystem}
+\begin{tikzpicture}
+  \begin{umlsystem}{Сайт}
+    \begin{scope}[start chain=options going below, node distance=0.6cm]
+      \umlusecase[on chain, name=visit-page]{Посетить страницу}
+      \umlusecase[on chain, xshift=3cm, name=give-feedback]{Дать обратную связь}
+      \umlusecase[on chain, xshift=3cm, name=rate-page]{Оценить по рейтинговой\\ системе}
+      \umlusecase[on chain, name=write-comment]{Оставить комментарий}
+      \umlusecase[on chain, xshift=-3cm, name=read-comments]{Прочитать комментарии}
+      \umlusecase[on chain, xshift=3cm, name=load-comments]{Загрузить все комментарии}
+      \umlusecase[on chain, xshift=-3cm, name=share-social]{Поделиться страницей}
+    \end{scope}
+  \end{umlsystem}
+  \umlactor[above=1cm of Сайт.north]{Пользователь}
+  \umlactor[below=0.5cm of Сайт.south]{Социальные сети}
 
-%   \umlactor[above=2cm of visit-page.west, xshift=2cm]{Пользователь}
-  
-%   \matrix (actors) [
-%     right=2.2cm of Сайт.east,
-%     anchor=center,
-%     row sep=0.5cm
-%   ] {
-%     \umlactor{LiveInternet} \\
-%     \umlactor{Рейтинг Mail{.}ru} \\
-%     \umlactor{VK Реклама} \\
-%     \umlactor{Google Аналитика} \\
-%     \umlactor{Яндекс Метрика} \\
-%     \umlactor{Социальные сети} \\
-%   };
+  \umlassoc{(Пользователь.west) -| ++(-1.8,0) -| (visit-page.north)}
+  \umlassoc{(Социальные сети.north) -| (share-social.south)}
 
-%   \umlassoc{(Пользователь.west) -| ++(-1.8,0) |- (visit-page.west)}
+  \umlrel{(give-feedback.west) -| (visit-page.-160)}{extend}
+  \umlrel{(read-comments.west) -| (visit-page.-165)}{extend}
+  \umlrel{(share-social.west) -| (visit-page.-170)}{extend}
 
-%   \umlrel{(visit-page.-173) |- (catch-visit.west)}{include}
-%   \umlrel{(visit-page.-173) |- (show-ad.west)}{include}
-%   \umlrel{(visit-page.-173) |- (write-metrics.west)}{include}
-%   \umlrel{(visit-page.-173) |- (share-social.west)}{include}
-  
-%   \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (LiveInternet.west)}
-%   \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (Рейтинг Mail{.}ru.west)}
+  \umlrel{(give-feedback.-165) |- (rate-page.west)}{include}
+  \umlrel{(give-feedback.-170) |- (write-comment.west)}{include}
 
-%   \umlassoc{(show-ad.east) -- ++(2,0) |- (VK Реклама.west)}
-
-%   \umlassoc{(write-metrics.east) -- ++(2,0) |- (Google Аналитика.west)}
-%   \umlassoc{(write-metrics.east) -- ++(2,0) |- (Яндекс Метрика.west)}
-
-%   \umlassoc{(share-social.east) -- ++(0.9,0) |- (Социальные сети.west)}
-% \end{tikzpicture}
+  \umlrel{(load-comments.west) -| (read-comments.-170)}{extend}
+\end{tikzpicture}
