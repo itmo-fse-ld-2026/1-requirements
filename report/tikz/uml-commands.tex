@@ -1,4 +1,7 @@
 \usetikzlibrary{fit}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{backgrounds}
 
 \tikzset{
   umlactorstyle/.style={
@@ -18,14 +21,15 @@
   }
 }
 
-\renewcommand{\umlactor}[2][]{%
+\newcommand{\umlactor}[2][]{%
   \node [umlactorstyle, label={[align=center]below:#2}, #1] (#2) {};
 }
 
-\renewcommand{\umlusecase}[2][]{%
+\newcommand{\umlusecase}[2][]{%
   \node [
     draw, 
-    ellipse, 
+    ellipse,
+    fill=white,
     align=center, 
     minimum width=3cm, 
     minimum height=1cm, 
@@ -33,16 +37,14 @@
   ] {#2};
 }
 
-\RenewDocumentEnvironment{umlsystem}{O{} m +b}{
+\NewDocumentEnvironment{umlsystem}{O{} m +b}{
   \begin{scope}
     #3 
-    % Create a coordinate to track the internal bounding box
     \coordinate (temp_boundary) at (current bounding box.center);
     \node (internal_fit) [fit=(current bounding box), inner sep=15pt] {};
   \end{scope}
 
   \begin{scope}[on background layer]
-    % This node is now named #2 (e.g., Сайт)
     \node[
       draw, 
       rectangle, 
@@ -50,15 +52,28 @@
       fill=black!3,
       fit=(internal_fit),
       label={[anchor=north, font=\bfseries]north:#2}
-    ] (#2) {}; % <--- This is the crucial part
+    ] (#2) {};
   \end{scope}
 }{}
 
-\renewcommand{\umlassoc}[2][]{
+\newcommand{\umlassoc}[2][]{
   \draw [#1] #2;
 }
 
 \newcommand{\umlrel}[3][]{
   \draw [->, >=latex, dashed, shorten >=2pt, #1] #2 
     node [pos=0.7, above, font=\footnotesize] {$\ll$#3$\gg$};
+}
+
+\tikzset{
+  inheritance/.style={
+    - {Triangle[open, length=8pt, width=8pt]},
+    thick, 
+    shorten >=0pt, 
+    shorten <=0pt
+  }
+}
+
+\newcommand{\umlinherit}[2][]{
+  \draw [inheritance, #1] #2;
 }

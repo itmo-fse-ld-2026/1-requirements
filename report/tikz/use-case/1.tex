@@ -32,7 +32,7 @@
   \umlrel{(visit-page.-173) |- (catch-visit.west)}{include}
   \umlrel{(visit-page.-173) |- (show-ad.west)}{include}
   \umlrel{(visit-page.-173) |- (write-metrics.west)}{include}
-  \umlrel{(visit-page.-173) |- (share-social.west)}{include}
+  \umlrel{(share-social.west) -| (visit-page.-170)}{extend}
   
   \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (LiveInternet.west)}
   \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (Рейтинг Mail{.}ru.west)}

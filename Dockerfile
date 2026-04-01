@@ -25,19 +25,3 @@ RUN \
     float \
     pgf && \
   apt-get clean
-
-# installs TikZ-UML package
-# (https://perso.ensta.fr/~kielbasi/tikzuml/index.php)
-RUN \
-  apt-get install -y bzip2 && \
-  curl -sSL https://perso.ensta.fr/~kielbasi/tikzuml/var/files/src/tikzuml-v1.0-2016-03-29.tbz -o tikzuml.tbz && \
-  tar -xjf tikzuml.tbz && rm tikzuml.tbz && \
-  mkdir -p $(kpsewhich -var-value=TEXMFHOME)/tex/latex && \
-  mv tikzuml-v1.0-2016-03-29/tikz-uml.sty $(kpsewhich -var-value=TEXMFHOME)/tex/latex && \
-  rm -r tikzuml-v1.0-2016-03-29 && \
-  apt-get remove -y bzip2 && \
-  apt-get autoremove -y && \
-  apt-get clean && \
-  tlmgr install \
-    xstring \
-    pgfopts
