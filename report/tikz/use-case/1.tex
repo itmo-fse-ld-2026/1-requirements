@@ -11,31 +11,31 @@
     \end{scope}
   \end{umlsystem}
 
-  \umlactor[above=2cm of visit-page.west, xshift=2cm]{Пользователь}
+  \umlactor[above=2cm of visit-page.west, xshift=2cm, name=user]{Пользователь}
   
   \matrix (actors) [
     right=2.2cm of Сайт.east,
     anchor=center,
     row sep=0.5cm
   ] {
-    \umlactor{LiveInternet} \\
-    \umlactor{Рейтинг Mail{.}ru} \\
-    \umlactor{VK Реклама} \\
-    \umlactor{Google Аналитика} \\
-    \umlactor{Яндекс Метрика} \\
+    \umlactor[name=live]{LiveInternet} \\
+    \umlactor[name=mail]{Рейтинг Mail{.}ru} \\
+    \umlactor[name=vk]{VK Реклама} \\
+    \umlactor[name=google]{Google Аналитика} \\
+    \umlactor[name=yandex]{Яндекс Метрика} \\
   };
 
-  \umlassoc{(Пользователь.west) -| ++(-1.8,0) |- (visit-page.west)}
+  \umlassoc{(user.west) -| ++(-1.8,0) |- (visit-page.west)}
 
   \umlrel{(visit-page.-173) |- (catch-visit.west)}{include}
   \umlrel{(visit-page.-173) |- (show-ad.west)}{include}
   \umlrel{(visit-page.-173) |- (write-metrics.west)}{include}
   
-  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (LiveInternet.west)}
-  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (Рейтинг Mail{.}ru.west)}
+  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (live.west)}
+  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (mail.west)}
 
-  \umlassoc{(show-ad.east) -- ++(2,0) |- (VK Реклама.west)}
+  \umlassoc{(show-ad.east) -- ++(2,0) |- (vk.west)}
 
-  \umlassoc{(write-metrics.east) -- ++(2,0) |- (Google Аналитика.west)}
-  \umlassoc{(write-metrics.east) -- ++(2,0) |- (Яндекс Метрика.west)}
+  \umlassoc{(write-metrics.east) -- ++(2,0) |- (google.west)}
+  \umlassoc{(write-metrics.east) -- ++(2,0) |- (yandex.west)}
 \end{tikzpicture}

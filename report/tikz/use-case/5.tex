@@ -1,1 +1,34 @@
-% empty
+\begin{tikzpicture}
+  \begin{umlsystem}{Сайт}
+    \umlusecase[name=start-auth]{Начать аутентификацию}
+
+    \umlusecase[below=0.6cm of start-auth, name=type-secrets]{Ввести секреты для входа}
+    \umlusecase[below=0.6cm of type-secrets, xshift=3.2cm, name=block-auth]{Временно заблокировать\\ попытки входа}
+    \umlusecase[below=0.6cm of type-secrets, xshift=-3cm, name=enter-panel]{Успешно\\ авторизоваться}
+    \begin{scope}[start chain=options going below, node distance=0.6cm]
+      \umlusecase[on chain, below=of enter-panel, xshift=3cm, name=control-site]{Управлять содержимым Сайта}
+      \umlusecase[on chain, xshift=2cm, name=create-page]{Создать новую страницу\\ на основе имеющихся блоков}
+      \umlusecase[on chain, name=read-page]{Просмотр существующей\\ страницы}
+      \umlusecase[on chain, name=update-page]{Изменить содержание\\ существующей страницы}
+      \umlusecase[on chain, name=delete-page]{Удалить существующую\\ страницу}
+    \end{scope}
+  \end{umlsystem}
+
+  \umlactor[above=1.8cm of start-auth.north, xshift=2cm, name=admin]{Администратор}
+  \umlactor[left=4cm of admin.west, name=auth-admin]{Авторизованный\\ администратор}
+
+  \umlinherit{(auth-admin.north) -- ++(0,1) -| (admin.north)}
+
+  \umlassoc{(admin.west) -| (start-auth.north)}
+  \umlassoc{(auth-admin.west) -- ++(-1.8,0) |- (control-site.west)}
+
+  \umlrel{(enter-panel.160) |- (type-secrets.west)}{extend}
+  \umlrel{(block-auth.170) -| (type-secrets.south)}{extend}
+
+  \umlrel{(create-page.west) -| (control-site.-172)}{extend}
+  \umlrel{(read-page.west) -| (control-site.-174)}{extend}
+  \umlrel{(update-page.west) -| (control-site.-176)}{extend}
+  \umlrel{(delete-page.west) -| (control-site.-178)}{extend}
+
+  \umlrel{(start-auth.east) -- ++(2.2,0) |- (type-secrets.east)}{include}
+\end{tikzpicture}

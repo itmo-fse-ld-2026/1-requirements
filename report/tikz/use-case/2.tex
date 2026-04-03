@@ -10,11 +10,11 @@
       \umlusecase[on chain, xshift=-3cm, name=share-social]{Поделиться страницей}
     \end{scope}
   \end{umlsystem}
-  \umlactor[above=1cm of Сайт.north]{Пользователь}
-  \umlactor[below=0.5cm of Сайт.south]{Социальные сети}
+  \umlactor[above=1cm of Сайт.north, name=user]{Пользователь}
+  \umlactor[below=0.5cm of Сайт.south, name=social-nets]{Социальные сети}
 
-  \umlassoc{(Пользователь.west) -| ++(-1.8,0) -| (visit-page.north)}
-  \umlassoc{(Социальные сети.north) -| (share-social.south)}
+  \umlassoc{(user.west) -| ++(-1.8,0) -| (visit-page.north)}
+  \umlassoc{(social-nets.north) -| (share-social.south)}
 
   \umlrel{(give-feedback.west) -| (visit-page.-160)}{extend}
   \umlrel{(read-comments.west) -| (visit-page.-165)}{extend}

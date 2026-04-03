@@ -12,11 +12,11 @@
       \umlusecase[on chain, name=time-block]{Использовать блок\\ с гаданиями из текущего\\ временного промежутка}
     \end{scope}
   \end{umlsystem}
-  \umlactor[above=1cm of Сайт.north]{Пользователь}
-  \umlactor[right=2cm of Пользователь.east]{PSE Google}
+  \umlactor[above=1cm of Сайт.north, name=user]{Пользователь}
+  \umlactor[right=2cm of user.east, name=google]{PSE Google}
 
-  \umlassoc{(Пользователь.west) -| (visit-main.north)}
-  \umlassoc{(PSE Google.east) -- ++(1.1,0) |- (search-page.5)}
+  \umlassoc{(user.west) -| (visit-main.north)}
+  \umlassoc{(google.east) -- ++(1.1,0) |- (search-page.5)}
 
   \umlrel{(header-nav.north) -- ++(0,0.25) -| (visit-main.south)}{extend}
   \umlrel{(see-favs.west) -| (visit-main.-155)}{extend}
