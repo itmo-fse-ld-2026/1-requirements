@@ -1,1 +1,37 @@
-% empty
+\begin{tikzpicture}
+  \begin{umlsystem}{Сайт}
+    \umlusecase[name=visit-divination]{Посетить страницу\\ с гаданием}
+    \umlusecase[below=0.6cm of visit-divination, xshift=-3cm, name=follow-help]{Следовать инструкциям\\ для получения предсказания}
+    \umlusecase[below=0.6cm of visit-divination, xshift=3.8cm, name=read-advice]{Прочитать блок\\ «Совет для вас»}
+    \umlusecase[below=0.6cm of read-advice, name=fallen-star]{Увидеть блок\\ «Упавшая звезда»}
+    \umlusecase[below=0.6cm of fallen-star, name=its-interesting]{Прочитать блок\\ «Это интересно»}
+    \begin{scope}[start chain=options going below, node distance=0.6cm]
+      \umlusecase[on chain, below=0.6cm of follow-help, name=visit-articles]{Посетить раздел\\ «Статьи»}
+      \umlusecase[on chain, name=visit-name]{Посетить раздел\\ «Значение имени»}
+      \umlusecase[on chain, name=visit-card]{Посетить раздел\\ «Натальная карта»}
+      \umlusecase[on chain, name=visit-myth]{Посетить раздел\\ «Славянская мифология»}
+      \umlusecase[on chain, name=visit-omen]{Посетить раздел\\ «Народные приметы»}
+    \end{scope}
+  \end{umlsystem}
+
+  \umlactor[above=1cm of Сайт.north, name=user]{Пользователь}
+
+  \umlassoc{(user.west) -| (visit-divination.165)}
+  \umlassoc{(user.west) -- ++(-6.52,0) |- (visit-articles.west)}
+
+  \umlrel{(follow-help.150) |- (visit-divination.-165)}{extend}
+  \umlrel{(read-advice.50) |- (visit-divination.east)}{extend}
+
+  \umlrel{(its-interesting.170) -- ++ (-0.5,0) |- (visit-articles.-20)}{extend}
+  \umlrel{(its-interesting.-170) |- (visit-name.-15)}{extend}
+  \umlrel{(its-interesting.-120) |- (visit-myth.east)}{extend}
+  \umlrel{(its-interesting.south) |- (visit-omen.east)}{extend}
+
+  \umlrel{(fallen-star.east) -- ++(0.3,0) |- (visit-divination.-20)}{extend}
+  \umlrel{(fallen-star.west) |- (visit-articles.east)}{extend}
+
+  \umlrel{(visit-divination.170) -- ++(-4.8,0) |- (visit-name.west)}{include}
+  \umlrel{(visit-divination.175) -- ++(-4.65,0) |- (visit-card.west)}{include}
+  \umlrel{(visit-divination.180) -- ++(-4.7,0) |- (visit-myth.west)}{include}
+  \umlrel{(visit-divination.185) -- ++(-4.95,0) |- (visit-omen.west)}{include}
+\end{tikzpicture}

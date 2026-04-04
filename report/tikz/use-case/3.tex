@@ -16,14 +16,14 @@
   \umlactor[right=2cm of user.east, name=google]{PSE Google}
 
   \umlassoc{(user.west) -| (visit-main.north)}
-  \umlassoc{(google.east) -- ++(1.1,0) |- (search-page.5)}
+  \umlassoc{(google.east) -- ++(1.1,0) |- (search-page.east)}
 
-  \umlrel{(header-nav.north) -- ++(0,0.25) -| (visit-main.south)}{extend}
+  \umlrel{(header-nav.10) |- (visit-main.east)}{extend}
   \umlrel{(see-favs.west) -| (visit-main.-155)}{extend}
   \umlrel{(random-block.west) -| (visit-main.-160)}{extend}
   \umlrel{(new-block.west) -| (visit-main.-165)}{extend}
   \umlrel{(time-block.west) -| (visit-main.-170)}{extend}
-  \umlrel{(choose-group.4) |- (visit-main.east)}{extend}
+  \umlrel{(choose-group.4) |- (visit-main.20)}{extend}
   \umlrel{(sort-group.west) -| (choose-group.-170)}{extend}
   \umlrel{(random-block.east) -- ++(2,0) |- (see-favs.east)}{extend}
 
