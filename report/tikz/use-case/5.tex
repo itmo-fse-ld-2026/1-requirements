@@ -1,6 +1,6 @@
 \begin{tikzpicture}
   \begin{umlsystem}{Сайт}
-    \umlusecase[name=start-auth]{Начать аутентификацию}
+    \umlusecase[name=start-auth]{Попытаться зайти\\ на Панель управления}
 
     \umlusecase[below=0.6cm of start-auth, name=type-secrets]{Ввести секреты для входа}
     \umlusecase[below=0.6cm of type-secrets, xshift=3.2cm, name=block-auth]{Временно заблокировать\\ попытки входа}
@@ -25,10 +25,10 @@
   \umlrel{(enter-panel.160) |- (type-secrets.west)}{extend}
   \umlrel{(block-auth.170) -| (type-secrets.south)}{extend}
 
-  \umlrel{(create-page.west) -| (control-site.-172)}{extend}
-  \umlrel{(read-page.west) -| (control-site.-174)}{extend}
-  \umlrel{(update-page.west) -| (control-site.-176)}{extend}
-  \umlrel{(delete-page.west) -| (control-site.-178)}{extend}
+  \umlinherit{(create-page.west) -| (control-site.-172)}
+  \umlinherit{(read-page.west) -| (control-site.-174)}
+  \umlinherit{(update-page.west) -| (control-site.-176)}
+  \umlinherit{(delete-page.west) -| (control-site.-178)}
 
   \umlrel{(start-auth.east) -- ++(2.2,0) |- (type-secrets.east)}{include}
 \end{tikzpicture}

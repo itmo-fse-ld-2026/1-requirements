@@ -20,8 +20,8 @@
   \umlrel{(read-comments.west) -| (visit-page.-165)}{extend}
   \umlrel{(share-social.west) -| (visit-page.-170)}{extend}
 
-  \umlrel{(give-feedback.-165) |- (rate-page.west)}{include}
-  \umlrel{(give-feedback.-170) |- (write-comment.west)}{include}
+  \umlinherit{(rate-page.west) -| (give-feedback.-165)}
+  \umlinherit{(write-comment.west) -| (give-feedback.-170)}
 
   \umlrel{(load-comments.west) -| (read-comments.-170)}{extend}
 \end{tikzpicture}

@@ -17,9 +17,9 @@
   \umlactor[above=1cm of Сайт.north, name=user]{Пользователь}
 
   \umlassoc{(user.west) -| (visit-divination.165)}
-  \umlassoc{(user.west) -- ++(-6.52,0) |- (visit-articles.west)}
+  \umlassoc{(user.west) -- ++(-6.8,0) |- (visit-articles.west)}
 
-  \umlrel{(follow-help.150) |- (visit-divination.-165)}{extend}
+  \umlrel{(follow-help.175) |- (visit-divination.-160)}{extend}
   \umlrel{(read-advice.50) |- (visit-divination.east)}{extend}
 
   \umlrel{(its-interesting.170) -- ++ (-0.5,0) |- (visit-articles.-20)}{extend}
@@ -30,8 +30,8 @@
   \umlrel{(fallen-star.east) -- ++(0.3,0) |- (visit-divination.-20)}{extend}
   \umlrel{(fallen-star.west) |- (visit-articles.east)}{extend}
 
-  \umlrel{(visit-divination.170) -- ++(-4.8,0) |- (visit-name.west)}{include}
-  \umlrel{(visit-divination.175) -- ++(-4.65,0) |- (visit-card.west)}{include}
-  \umlrel{(visit-divination.180) -- ++(-4.7,0) |- (visit-myth.west)}{include}
-  \umlrel{(visit-divination.185) -- ++(-4.95,0) |- (visit-omen.west)}{include}
+  \umlinherit{(visit-name.west) -- ++(-1.5,0) |- (visit-divination.170)}
+  \umlinherit{(visit-card.west) -- ++(-1.47,0) |- (visit-divination.175)}
+  \umlinherit{(visit-myth.west) -- ++(-0.7,0) |- (visit-divination.180)}
+  \umlinherit{(visit-omen.west) -- ++(-1.4,0) |- (visit-divination.185)}
 \end{tikzpicture}
