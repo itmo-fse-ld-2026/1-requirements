@@ -1,0 +1,41 @@
+\begin{tikzpicture}
+  \begin{umlsystem}{Сайт}
+    \umlusecase[name=visit-page]{Посетить страницу}
+    \begin{scope}[
+      start chain=cases going below, 
+      node distance=0.5cm
+    ]
+      \umlusecase[on chain, below=of visit-page, xshift=2cm, name=catch-visit]{Зафиксировать посещение}
+      \umlusecase[on chain, name=show-ad]{Показать рекламу}
+      \umlusecase[on chain, name=write-metrics]{Записать метрики}
+    \end{scope}
+  \end{umlsystem}
+
+  \umlactor[above=2cm of visit-page.west, xshift=2cm, name=user]{Пользователь}
+  
+  \matrix (actors) [
+    right=2.2cm of Сайт.east,
+    anchor=center,
+    row sep=0.5cm
+  ] {
+    \umlactor[name=live]{LiveInternet} \\
+    \umlactor[name=mail]{Рейтинг Mail{.}ru} \\
+    \umlactor[name=vk]{VK Реклама} \\
+    \umlactor[name=google]{Google Аналитика} \\
+    \umlactor[name=yandex]{Яндекс Метрика} \\
+  };
+
+  \umlassoc{(user.west) -| ++(-1.8,0) |- (visit-page.west)}
+
+  \umlrel{(visit-page.-172) |- (catch-visit.west)}{include}
+  \umlrel{(visit-page.-175) |- (show-ad.west)}{include}
+  \umlrel{(visit-page.-178) |- (write-metrics.west)}{include}
+  
+  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (live.west)}
+  \umlassoc{(catch-visit.east) -- ++(0.8,0) |- (mail.west)}
+
+  \umlassoc{(show-ad.east) -- ++(2,0) |- (vk.west)}
+
+  \umlassoc{(write-metrics.east) -- ++(2,0) |- (google.west)}
+  \umlassoc{(write-metrics.east) -- ++(2,0) |- (yandex.west)}
+\end{tikzpicture}
