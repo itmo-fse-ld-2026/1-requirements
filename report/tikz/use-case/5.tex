@@ -14,16 +14,13 @@
     \end{scope}
   \end{umlsystem}
 
-  \umlactor[above=1.8cm of start-auth.north, xshift=2cm, name=admin]{Администратор}
-  \umlactor[left=4cm of admin.west, name=auth-admin]{Авторизованный\\ администратор}
+  \umlactor[above=1.8cm of start-auth.north, xshift=-2cm, name=admin]{Администратор}
 
-  \umlinherit{(auth-admin.north) -- ++(0,1) -| (admin.north)}
-
-  \umlassoc{(admin.west) -| (start-auth.north)}
-  \umlassoc{(auth-admin.west) -- ++(-1.8,0) |- (control-site.west)}
+  \umlassoc{(admin.east) -| (start-auth.north)}
 
   \umlrel{(enter-panel.160) |- (type-secrets.west)}{extend}
   \umlrel{(block-auth.170) -| (type-secrets.south)}{extend}
+  \umlrel{(control-site.west) -- ++(-1.4,0) |- (enter-panel.west)}{extend}
 
   \umlinherit{(create-page.west) -| (control-site.-172)}
   \umlinherit{(read-page.west) -| (control-site.-174)}
