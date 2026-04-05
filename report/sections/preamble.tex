@@ -16,7 +16,7 @@
     colorlinks=true,        % цветные ссылки (false - черные рамки)
     linkcolor=black,        % цвет ссылок на разделы
     urlcolor=blue,          % цвет URL-ссылок
-    citecolor=green,        % цвет ссылок на литературу
+    citecolor=blue,         % цвет ссылок на литературу
     pdfborder={0 0 0}       % убрать рамки вокруг ссылок
 }
 
@@ -102,3 +102,17 @@
   \fi
 }
 \makeatother
+
+\usepackage{tikz}
+  \usetikzlibrary{positioning}
+  \usetikzlibrary{chains}
+  \usetikzlibrary{matrix}
+
+\input{tikz/uml-commands}
+
+\usepackage[
+    backend=biber,
+    style=gost-numeric,
+    sorting=none
+]{biblatex}
+\addbibresource{refs.bib}

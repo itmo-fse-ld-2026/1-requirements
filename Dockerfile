@@ -8,7 +8,7 @@ FROM ghcr.io/mrdvd/xetex-base:2026
 
 RUN \
   apt-get update && \
-  apt install -y make fonts-cmu && \
+  apt-get install -y make fonts-cmu && \
   # fixes error "Local TeX Live (YYYY-1) is older than remote repository (YYYY)"
   curl -sSL http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh -o update-tlmgr-latest.sh && \
   sh update-tlmgr-latest.sh && rm update-tlmgr-latest.sh && \
@@ -24,5 +24,9 @@ RUN \
     tools \
     float \
     tabularray \
-    varwidth && \
+    varwidth \
+    pgf \
+    biblatex \
+    biblatex-gost \
+    biber && \
   apt-get clean
