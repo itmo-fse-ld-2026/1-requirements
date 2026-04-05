@@ -22,5 +22,8 @@ RUN \
     titlesec \
     etoolbox \
     tools \
-    float && \
+    float \
+    biblatex \
+    biblatex-gost \
+    biber && \
   apt-get clean
