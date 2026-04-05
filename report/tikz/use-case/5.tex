@@ -8,9 +8,10 @@
     \begin{scope}[start chain=options going below, node distance=0.6cm]
       \umlusecase[on chain, below=of enter-panel, xshift=3cm, name=control-site]{Управлять содержимым Сайта}
       \umlusecase[on chain, xshift=2cm, name=create-page]{Создать новую страницу\\ на основе имеющихся блоков}
-      \umlusecase[on chain, name=read-page]{Просмотр существующей\\ страницы}
-      \umlusecase[on chain, name=update-page]{Изменить содержание\\ существующей страницы}
+      \umlusecase[on chain, name=read-page]{Посмотреть существующую\\ страницу}
+      \umlusecase[on chain, name=update-page]{Изменить содержание\\ существующей страницы\\ или параметры спец. блоков}
       \umlusecase[on chain, name=delete-page]{Удалить существующую\\ страницу}
+      \umlusecase[on chain, name=moderate-comments]{Модерировать комментарии}
     \end{scope}
   \end{umlsystem}
 
@@ -22,10 +23,11 @@
   \umlrel{(block-auth.170) -| (type-secrets.south)}{extend}
   \umlrel{(control-site.west) -| (enter-panel.-168)}{extend}
 
-  \umlinherit{(create-page.west) -| (control-site.-172)}
-  \umlinherit{(read-page.west) -| (control-site.-174)}
-  \umlinherit{(update-page.west) -| (control-site.-176)}
-  \umlinherit{(delete-page.west) -| (control-site.-178)}
+  \umlinherit{(create-page.west) -| (control-site.-170)}
+  \umlinherit{(read-page.west) -| (control-site.-172)}
+  \umlinherit{(update-page.west) -| (control-site.-174)}
+  \umlinherit{(delete-page.west) -| (control-site.-176)}
+  \umlinherit{(moderate-comments.west) -| (control-site.-178)}
 
   \umlrel{(start-auth.east) -- ++(2.2,0) |- (type-secrets.east)}{include}
 \end{tikzpicture}
