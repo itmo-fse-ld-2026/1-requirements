@@ -23,5 +23,8 @@ RUN \
     etoolbox \
     tools \
     float \
-    pgf && \
+    pgf \
+    biblatex \
+    biblatex-gost \
+    biber && \
   apt-get clean
