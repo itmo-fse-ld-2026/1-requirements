@@ -20,7 +20,7 @@
 
   \umlrel{(enter-panel.160) |- (type-secrets.west)}{extend}
   \umlrel{(block-auth.170) -| (type-secrets.south)}{extend}
-  \umlrel{(control-site.west) -- ++(-1.4,0) |- (enter-panel.west)}{extend}
+  \umlrel{(control-site.west) -| (enter-panel.-168)}{extend}
 
   \umlinherit{(create-page.west) -| (control-site.-172)}
   \umlinherit{(read-page.west) -| (control-site.-174)}
