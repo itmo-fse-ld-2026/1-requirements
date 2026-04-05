@@ -1,17 +1,102 @@
 \subsubsection{External Interface Requirements}
 
-This should be a detailed description of all inputs into and outputs from the software system. It should
-complement the interface descriptions in 5.2 and should not repeat information there.
-It should include both content and format as follows:
-a) Name of item;
-b) Description of purpose;
-c) Source of input or destination of output;
-d) Valid range, accuracy, and/or tolerance;
-e) Units of measure;
-f) Timing;
-g) Relationships to other inputs/outputs;
-h) Screen formats/organization;
-i) Window formats/organization;
-j) Data formats;
-k) Command formats;
-l) End messages.
+\resetreqcounter{GeIR}
+\begin{srstable}[
+  caption = {Детали общих интерфейсов.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{GeIR} & Поиск на Сайте \textit{Должен} быть реализован через программируемую поисковую систему Google. \\
+  \reqlabel{GeIR} & Поле поиска в шапке Сайта \textit{Должно} отправлять запрос к индексу Google, ограниченному доменом \texttt{magya-online.ru}. \\
+  \reqlabel{GeIR} & Результаты поиска \textit{Должны} отображаться на отдельной странице в стандартном виде Google. \\
+\end{srstable}
+
+\resetreqcounter{CmIR}
+\begin{srstable}[
+  caption = {Детали интерфейса комментариев.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{CmIR} & Форма отправки комментария \textit{Должна} отправляться методом POST. \\
+  \reqlabel{CmIR} & Поля формы отправки комментария \textit{Должны} принимать неограниченное количество символов. \\
+  \reqlabel{CmIR} & Поля формы отправки комментария \textit{Должны} быть обязательными для заполнения. \\
+  \reqlabel{CmIR} & Система \textit{Должна} показывать сообщение «Ваш коментарий добавлен. После рассмотрения модератором он будет размещен на сайте» при успешной отправке формы комментария. \\
+  \reqlabel{CmIR} & Система \textit{Должна} показывать сообщение «Введите все данные!» при наличии пустых полей в форме. \\
+  \reqlabel{CmIR} & Пагинация комментариев \textit{Должна} отображаться в виде кнопки «Смотреть все комментарии». \\
+\end{srstable}
+
+\resetreqcounter{RtIR}
+\begin{srstable}[
+  caption = {Детали интерфейса рейтинга.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{RtIR} & Виджет оценки \textit{Должен} отправлять выбранное значение сразу после взаимодействия с ним без дополнительного подтверждения. \\
+  \reqlabel{RtIR} & Система \textit{Должна} показывать сообщение «Ваш голос засчитан. Спасибо!» при успешной отправке оценки. \\
+  \reqlabel{RtIR} & Рейтинг \textit{Должен} отображать среднюю оценку и количество голосов. \\
+\end{srstable}
+
+\resetreqcounter{NvIR}
+\begin{srstable}[
+  caption = {Детали интерфейса навигации.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{NvIR} & Кнопка «Наверх» \textit{Должна} появляться при прокрутке страницы вниз более чем на 300 пикселей. \\
+  \reqlabel{NvIR} & Кнопка «Наверх» \textit{Должна} быть закреплена в левом нижнем углу экрана. \\
+\end{srstable}
+
+\resetreqcounter{AdIR}
+\begin{srstable}[
+  caption = {Детали интерфейса блока «Совет для вас».},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{AdIR} & Асинхронный запрос для блока \textit{Должен} выполняться методом POST к URL \texttt{/ajax.php} с параметром \texttt{sovet\_dnya: true}. \\
+  \reqlabel{AdIR} & Ответ сервера \textit{Должен} содержать HTML-блок с изображением карты, названием и текстом совета. \\
+\end{srstable}
+
+\resetreqcounter{ItIR}
+\begin{srstable}[
+  caption = {Детали интерфейса блока «Это интересно».},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{ItIR} & Факт \textit{Должен} быть встроен в HTML при первой загрузке страницы (SSR). \\
+  \reqlabel{ItIR} & Система \textit{Должна} выполнять асинхронный запрос к серверу для получения нового факта при нажатии на кнопку обновления. \\
+\end{srstable}
+
+\resetreqcounter{FvIR}
+\begin{srstable}[
+  caption = {Детали интерфейса избранного.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{FvIR} & Добавление в избранное \textit{Должно} выполняться асинхронно методом POST к URL \texttt{/favorite.php}. \\
+  \reqlabel{FvIR} & Запрос \textit{Должен} передавать идентификатор страницы (ID) и её название. \\
+  \reqlabel{FvIR} & Кнопка добавления \textit{Должна} заменяться на надпись «В избранных» при успешном добавлении страницы в избранное. \\
+  \reqlabel{FvIR} & Счётчик избранных страниц \textit{Должен} обновляться при успешном добавлении страины в избранное. \\
+  \reqlabel{FvIR} & Система \textit{Должна} выполнять переход на страницу \texttt{/izbrannoe} при клике на элемент, отображающий счётчик избранного. \\
+\end{srstable}
+
+\resetreqcounter{NtIR}
+\begin{srstable}[
+  caption = {Детали интерфейса натальной карты.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{NtIR} & Поле «дата рождения» \textit{Должно} использовать графический календарь с возможностью выбора года, месяца и дня. \\
+  \reqlabel{NtIR} & Поле «время рождения» \textit{Должно} использовать два выпадающих списка: часы (0–23) и минуты (0–59). \\
+  \reqlabel{NtIR} & Поле «город рождения» \textit{Должно} иметь автодополнение: при вводе первых трёх букв показываются варианты городов. \\
+  \reqlabel{NtIR} & Результат расчёта \textit{Должен} отображаться асинхронно на той же странице без перезагрузки. \\
+\end{srstable}
+
+\resetreqcounter{OmIR}
+\begin{srstable}[
+  caption = {Детали интерфейса раздела «Народные приметы».},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{OmIR} & Выбор даты \textit{Должен} выполняться через ссылки на странице примет. \\
+  \reqlabel{OmIR} & Система \textit{Должна} отображать новую страницу для выбранной даты. \\
+\end{srstable}
+
+\resetreqcounter{ArIR}
+\begin{srstable}[
+  caption = {Детали интерфейса раздела статей.},
+]{colspec = {Q[c, m] X[j, m]}}
+  Идентификатор & Описание \\
+  \reqlabel{ArIR} & Выпадающий список оглавления \textit{Должен} быть кликабельным. \\
+  \reqlabel{ArIR} & Имя и фамилия автора \textit{Должны} отображаться в конце текста статьи. \\
+\end{srstable}
