@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+  \begin{umlsystem}{Сайт}
+    \begin{scope}[start chain=options going below, node distance=0.6cm]
+      \umlusecase[on chain, name=visit-main]{Посетить\\ главную страницу}
+      \umlusecase[on chain, xshift=2.5cm, name=header-nav]{Навигация через Шапку}
+      \umlusecase[on chain, xshift=2cm, name=search-page]{Воспользоваться\\ поисковой строкой}
+      \umlusecase[on chain, name=choose-group]{Выбор группы гаданий}
+      \umlusecase[on chain, xshift=2cm, name=sort-group]{Сортировать группу}
+      \umlusecase[on chain, xshift=-2cm, name=see-favs]{Посмотреть «избранные»\\ страницы}
+      \umlusecase[on chain, name=random-block]{Использовать блок\\ «Судьба и случай\\ рекомендуют»}
+      \umlusecase[on chain, name=new-block]{Использовать блок\\ с новыми гаданиями}
+      \umlusecase[on chain, name=time-block]{Использовать блок\\ с гаданиями из текущего\\ временного промежутка}
+    \end{scope}
+  \end{umlsystem}
+  \umlactor[above=1cm of Сайт.north, name=user]{Пользователь}
+  \umlactor[right=2cm of user.east, name=google]{PSE Google}
+
+  \umlassoc{(user.west) -| (visit-main.north)}
+  \umlassoc{(google.east) -- ++(1.1,0) |- (search-page.east)}
+
+  \umlrel{(header-nav.10) |- (visit-main.east)}{extend}
+  \umlrel{(see-favs.west) -| (visit-main.-155)}{extend}
+  \umlrel{(random-block.west) -| (visit-main.-160)}{extend}
+  \umlrel{(new-block.west) -| (visit-main.-165)}{extend}
+  \umlrel{(time-block.west) -| (visit-main.-170)}{extend}
+  \umlrel{(choose-group.4) |- (visit-main.20)}{extend}
+  \umlrel{(sort-group.west) -| (choose-group.-170)}{extend}
+  \umlrel{(random-block.east) -- ++(2,0) |- (see-favs.east)}{extend}
+
+  \umlinherit{(search-page.west) -| (header-nav.-165)}
+  \umlinherit{(choose-group.west) -| (header-nav.-170)}
+\end{tikzpicture}
