@@ -23,6 +23,8 @@ RUN \
     etoolbox \
     tools \
     float \
+    tabularray \
+    varwidth \
     pgf \
     biblatex \
     biblatex-gost \

@@ -29,6 +29,80 @@
 \usepackage{tabularx}
 \usepackage{float} % for [H] option in table environment
 
+\newenvironment{compactitem}{%
+  \setlength{\leftmargini}{8mm}%
+  \vspace{-0.5\topsep}%
+  \begin{itemize}%
+    \setlength{\itemsep}{3pt}%
+    \setlength{\parskip}{0pt}%
+}{%
+  \end{itemize}%
+  \vspace{-\topsep}%
+  \ignorespacesafterend%
+}
+
+\usepackage{tabularray}
+  \UseTblrLibrary{varwidth}
+  \UseTblrLibrary{counter}
+
+\DefTblrTemplate{firsthead,middlehead,lasthead}{default}{
+}
+\DefTblrTemplate{firstfoot}{default}{
+  \UseTblrTemplate{contfoot}{default}
+}
+\DefTblrTemplate{middlefoot}{default}{
+  \UseTblrTemplate{contfoot}{default}
+  \UseTblrTemplate{capcont}{default}
+}
+\DefTblrTemplate{lastfoot}{default}{
+  \UseTblrTemplate{note}{default}
+  \UseTblrTemplate{remark}{default}
+  \addvspace{9pt}
+  \UseTblrTemplate{caption}{default}
+}
+\DeclareTblrTemplate{contfoot-text}{default}{См. далее}
+
+\NewTblrEnviron{srstable}
+\SetTblrInner[srstable]{
+  rowhead = 1, hlines, vlines,
+  row{1} = {font=\bfseries, halign=c},
+  rowsep = 4pt,
+  measure=vbox,
+}
+\SetTblrOuter[srstable]{
+  postsep = 9pt,
+  long,
+}
+
+\makeatletter
+\newcommand{\reqlabel}[2][]{%
+  % #1 = optional label (e.g., auth)
+  % #2 = prefix (e.g., REQ)
+  \ifcsname c@#2\endcsname\else\newcounter{#2}\fi
+  \stepcounter{#2}%
+  \edef\myid{#2-\ifnum\value{#2}<10 0\fi\arabic{#2}}%
+  \myid
+  \ifx&#1&\else
+    \def\@currentlabel{\myid}%
+    \label{#1}%
+  \fi
+}
+
+\newcommand{\reqref}[2][]{%
+  % #1 = optional description
+  % #2 = label name
+  \ref{#2}\ifx&#1&\else\ (#1)\fi
+}
+
+\newcommand{\resetreqcounter}[1]{%
+  \ifcsname c@#1\endcsname
+    \setcounter{#1}{0}%
+  \else
+    \newcounter{#1}\setcounter{#1}{0}%
+  \fi
+}
+\makeatother
+
 \usepackage{tikz}
   \usetikzlibrary{positioning}
   \usetikzlibrary{chains}

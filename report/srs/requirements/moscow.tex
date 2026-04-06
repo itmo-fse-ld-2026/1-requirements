@@ -1,0 +1,142 @@
+\subsubsection{Requirements Prioritization and Effort Estimation}
+
+\begin{srstable}[
+  caption = {Оценка функциональных требований.},
+]{colspec = {Q[4cm, c, m] Q[2.5cm, c, m] Q[3cm, c, m] Q[3cm, c, m]}}
+  Идентификатор & Приоритет & Стабильность & Трудоёмкость (чел.-ч) \\
+  \ref{ref:gef1} & Must & Высокая & 4 \\
+  \ref{ref:gef2} & Should & Низкая & 8 \\
+  \ref{ref:gef3} & Should & Средняя & 3 \\
+  \ref{ref:mpf1} & Must & Высокая & 3 \\
+  \ref{ref:mpf2} & Should & Средняя & 5 \\
+  \ref{ref:lgf1} & Must & Высокая & 1 \\
+  \ref{ref:lgf2} & Must & Высокая & 1 \\
+  \ref{ref:lgf3} & Should & Средняя & 1 \\
+  \ref{ref:lgf4} & Should & Средняя & 1 \\
+  \ref{ref:dvf1} & Must & Высокая & 8 \\
+  \ref{ref:dvf2} & Must & Высокая & 4 \\
+  \ref{ref:dvf3} & Must & Высокая & 6 \\
+  \ref{ref:dvf4} & Could & Средняя & 5 \\
+  \ref{ref:dvf5} & Must & Высокая & 4 \\
+  \ref{ref:fbf1} & Must & Высокая & 2 \\
+  \ref{ref:fbf2} & Must & Высокая & 6 \\
+  \ref{ref:fbf3} & Must & Высокая & 3 \\
+  \ref{ref:fbf4} & Must & Высокая & 2 \\
+  \ref{ref:fbf5} & Must & Высокая & 2 \\
+  \ref{ref:fbf6} & Must & Высокая & 2 \\
+  \ref{ref:fbf7} & Must & Высокая & 2 \\
+  \ref{ref:fbf8} & Must & Высокая & 2 \\
+  \ref{ref:fbf9} & Must & Высокая & 1 \\
+  \ref{ref:fbf10} & Should & Средняя & 3 \\
+  \ref{ref:fvf1} & Must & Высокая & 3 \\
+  \ref{ref:fvf2} & Must & Высокая & 2 \\
+  \ref{ref:fvf3} & Must & Высокая & 4 \\
+  \ref{ref:fvf4} & Must & Высокая & 5 \\
+  \ref{ref:fvf5} & Could & Средняя & 3 \\
+  \ref{ref:amf1} & Must & Высокая & 16 \\
+  \ref{ref:amf2} & Should & Средняя & 2 \\
+  \ref{ref:amf3} & Must & Высокая & 4 \\
+  \ref{ref:amf4} & Could & Средняя & 6 \\
+  \ref{ref:nvf1} & Should & Высокая & 2 \\
+  \ref{ref:nvf2} & Should & Высокая & 1 \\
+  \ref{ref:adf1} & Must & Высокая & 2 \\
+  \ref{ref:adf2} & Must & Высокая & 3 \\
+  \ref{ref:adf3} & Must & Высокая & 2 \\
+  \ref{ref:adf4} & Must & Высокая & 2 \\
+  \ref{ref:itf1} & Should & Средняя & 2 \\
+  \ref{ref:itf2} & Should & Средняя & 2 \\
+  \ref{ref:itf3} & Should & Средняя & 3 \\
+  \ref{ref:itf4} & Should & Средняя & 2 \\
+  \ref{ref:stf1} & Could & Низкая & 5 \\
+  \ref{ref:stf2} & Could & Низкая & 2 \\
+  \ref{ref:rcf1} & Should & Средняя & 2 \\
+  \ref{ref:rcf2} & Should & Средняя & 2 \\
+  \ref{ref:arf1} & Must & Высокая & 3 \\
+  \ref{ref:arf2} & Must & Высокая & 4 \\
+  \ref{ref:arf3} & Must & Высокая & 2 \\
+  \ref{ref:arf4} & Must & Высокая & 6 \\
+  \ref{ref:fdf1} & Should & Средняя & 3 \\
+  \ref{ref:fdf2} & Should & Средняя & 3 \\
+  \ref{ref:fdf3} & Should & Средняя & 3 \\
+  \ref{ref:nmf1} & Must & Высокая & 3 \\
+  \ref{ref:nmf2} & Must & Высокая & 3 \\
+  \ref{ref:nmf3} & Should & Средняя & 4 \\
+  \ref{ref:nmf4} & Must & Высокая & 4 \\
+  \ref{ref:nmf5} & Must & Высокая & 6 \\
+  \ref{ref:nmf6} & Could & Низкая & 3 \\
+  \ref{ref:ntf1} & Could & Низкая & 3 \\
+  \ref{ref:ntf2} & Could & Низкая & 8 \\
+  \ref{ref:ntf3} & Could & Низкая & 4 \\
+  \ref{ref:mtf1} & Should & Средняя & 3 \\
+  \ref{ref:mtf2} & Should & Средняя & 4 \\
+  \ref{ref:mtf3} & Should & Средняя & 5 \\
+  \ref{ref:mtf4} & Should & Средняя & 3 \\
+  \ref{ref:omf1} & Should & Средняя & 3 \\
+  \ref{ref:omf2} & Should & Средняя & 4 \\
+\end{srstable}
+
+\begin{srstable}[
+  caption = {Оценка нефункциональных требований.},
+]{colspec = {Q[4cm, c, m] Q[2.5cm, c, m] Q[3cm, c, m] Q[3cm, c, m]}}
+  Идентификатор & Приоритет & Стабильность & Трудоёмкость (чел.-ч) \\
+  \ref{ref:pfnf1} & Must & Высокая & 8 \\
+  \ref{ref:pfnf2} & Must & Высокая & 4 \\
+  \ref{ref:pfnf3} & Must & Высокая & 3 \\
+  \ref{ref:pfnf4} & Must & Высокая & 6 \\
+  \ref{ref:pfnf5} & Must & Высокая & 2 \\
+  \ref{ref:pfnf6} & Should & Средняя & 8 \\
+  \ref{ref:avnf1} & Must & Высокая & 2 \\
+  \ref{ref:avnf2} & Must & Высокая & 1 \\
+  \ref{ref:avnf3} & Should & Высокая & 2 \\
+  \ref{ref:rlnf1} & Must & Высокая & 4 \\
+  \ref{ref:rlnf2} & Must & Высокая & 3 \\
+  \ref{ref:rlnf3} & Should & Высокая & 2 \\
+  \ref{ref:rlnf4} & Must & Средняя & 5 \\
+  \ref{ref:scnf1} & Must & Высокая & 2 \\
+  \ref{ref:scnf2} & Must & Высокая & 3 \\
+  \ref{ref:scnf3} & Must & Высокая & 2 \\
+  \ref{ref:scnf4} & Must & Высокая & 8 \\
+  \ref{ref:scnf5} & Should & Средняя & 3 \\
+  \ref{ref:usnf1} & Must & Высокая & 6 \\
+  \ref{ref:usnf2} & Should & Средняя & 3 \\
+  \ref{ref:usnf3} & Must & Высокая & 3 \\
+  \ref{ref:ptnf1} & Must & Высокая & 6 \\
+  \ref{ref:ptnf2} & Must & Высокая & 1 \\
+\end{srstable}
+
+\begin{srstable}[
+  caption = {Оценка интерфейсных требований.},
+]{colspec = {Q[4cm, c, m] Q[2.5cm, c, m] Q[3cm, c, m] Q[3cm, c, m]}}
+  Идентификатор & Приоритет & Стабильность & Трудоёмкость (чел.-ч) \\
+  \ref{ref:gei1} & Should & Низкая & 2 \\
+  \ref{ref:gei2} & Should & Высокая & 1 \\
+  \ref{ref:gei3} & Should & Низкая & 1 \\
+  \ref{ref:cmi1} & Must & Высокая & 1 \\
+  \ref{ref:cmi2} & Must & Высокая & 1 \\
+  \ref{ref:cmi3} & Must & Высокая & 1 \\
+  \ref{ref:cmi4} & Must & Высокая & 1 \\
+  \ref{ref:cmi5} & Must & Высокая & 1 \\
+  \ref{ref:cmi6} & Should & Средняя & 2 \\
+  \ref{ref:rti1} & Must & Высокая & 1 \\
+  \ref{ref:rti2} & Must & Высокая & 1 \\
+  \ref{ref:rti3} & Should & Высокая & 2 \\
+  \ref{ref:nvi1} & Must & Высокая & 1 \\
+  \ref{ref:nvi2} & Should & Средняя & 1 \\
+  \ref{ref:adi1} & Must & Высокая & 2 \\
+  \ref{ref:adi2} & Must & Высокая & 2 \\
+  \ref{ref:iti1} & Should & Средняя & 2 \\
+  \ref{ref:iti2} & Should & Средняя & 2 \\
+  \ref{ref:fvi1} & Must & Высокая & 2 \\
+  \ref{ref:fvi2} & Must & Высокая & 1 \\
+  \ref{ref:fvi3} & Must & Высокая & 2 \\
+  \ref{ref:fvi4} & Must & Высокая & 1 \\
+  \ref{ref:fvi5} & Must & Высокая & 1 \\
+  \ref{ref:nti1} & Could & Низкая & 3 \\
+  \ref{ref:nti2} & Could & Низкая & 2 \\
+  \ref{ref:nti3} & Could & Низкая & 4 \\
+  \ref{ref:nti4} & Could & Низкая & 3 \\
+  \ref{ref:omi1} & Should & Средняя & 2 \\
+  \ref{ref:omi2} & Should & Средняя & 2 \\
+  \ref{ref:ari1} & Must & Высокая & 2 \\
+  \ref{ref:ari2} & Must & Высокая & 1 \\
+\end{srstable}
