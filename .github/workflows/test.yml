@@ -3,6 +3,7 @@ name: Test PDF
 on:
   pull_request:
     branches: [dev]
+    types: [opened, synchronize, edited, reopened]
 
 jobs:
   docker_changes:

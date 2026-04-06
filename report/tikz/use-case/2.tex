@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+  \begin{umlsystem}{Сайт}
+    \begin{scope}[start chain=options going below, node distance=0.6cm]
+      \umlusecase[on chain, name=visit-page]{Посетить страницу}
+      \umlusecase[on chain, xshift=3cm, name=give-feedback]{Дать обратную связь}
+      \umlusecase[on chain, xshift=3cm, name=rate-page]{Оценить по рейтинговой\\ системе}
+      \umlusecase[on chain, name=write-comment]{Оставить комментарий}
+      \umlusecase[on chain, xshift=-3cm, name=read-comments]{Прочитать комментарии}
+      \umlusecase[on chain, xshift=3cm, name=load-comments]{Загрузить все комментарии}
+      \umlusecase[on chain, xshift=-3cm, name=share-social]{Поделиться страницей}
+    \end{scope}
+  \end{umlsystem}
+  \umlactor[above=1cm of Сайт.north, name=user]{Пользователь}
+  \umlactor[below=0.5cm of Сайт.south, name=social-nets]{Социальные сети}
+
+  \umlassoc{(user.west) -| ++(-1.8,0) -| (visit-page.north)}
+  \umlassoc{(social-nets.north) -| (share-social.south)}
+
+  \umlrel{(give-feedback.west) -| (visit-page.-160)}{extend}
+  \umlrel{(read-comments.west) -| (visit-page.-165)}{extend}
+  \umlrel{(share-social.west) -| (visit-page.-170)}{extend}
+
+  \umlinherit{(rate-page.west) -| (give-feedback.-165)}
+  \umlinherit{(write-comment.west) -| (give-feedback.-170)}
+
+  \umlrel{(load-comments.west) -| (read-comments.-170)}{extend}
+\end{tikzpicture}
